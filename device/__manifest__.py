@@ -13,6 +13,7 @@
         'security/ir.model.access.csv',
         'views/device_main.xml',
         'views/device_extra.xml',
+        'views/device_parts_in.xml',
         'data/device_sequence.xml',
         'views/menu.xml'
     ],
