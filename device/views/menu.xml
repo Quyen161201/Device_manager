@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem name="Quản lý thiết bị" id="root_menu_device" />
+        <menuitem name="Thiết bị chính" id="device_menu" parent="root_menu_device"  action="device_main_act_window"/>
+        <menuitem name="Thiết bị phụ tùng" id="device_extra_menu"  action="device_extra_act_window" parent="root_menu_device"/>
+
+
+
+
+
+    </data>
+</odoo>
