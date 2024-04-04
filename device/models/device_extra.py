@@ -21,6 +21,8 @@ class ModelName(models.Model):
     price = fields.Integer('Giá', default=0)
     partner = fields.Char('Nhà cung cấp')
     image_1920 = fields.Binary(default=_default_image, store=True)
+    description_images_ids= fields.One2many('device.image','extra_device_id','Hình ảnh mô tả')
+
 
     def open_liquidate(self):
         self.status = 'liquidate'
