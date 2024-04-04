@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="device_extra_form_view" model="ir.ui.view">
+            <field name="name">device.extra.form</field>
+            <field name="model">device.extra</field>
+            <field name="arch" type="xml">
+                <form string="Thiết bị phụ tùng">
+                     <header>
+                        <button type="object" name="open_using"  string="Đang sử dụng"  invisible="status in ['using','not_used']"
+                         confirm="Bạn đã chắc chắn?"  class="btn btn-warning"/>
+                       <button type="object" name="open_liquidate"  string="Chờ thanh lý"  invisible="status in ['liquidate','not_used']"
+                         confirm="Bạn đã chắc chắn?"  class="btn btn-warning"/>
+                        <button type="object" name="open_is_broken"  string="Đang hỏng"  invisible="status in ['liquidate','is_broken']"
+                         confirm="Bạn đã chắc chắn?"  class="btn btn-warning"/>
+                        <button type="object" name="open_loss"  string="Bị mất"  invisible="status in ['loss','not_used']"
+                         confirm="Bạn đã chắc chắn?"  class="btn btn-warning"/>
+                         <field name="status" widget="statusbar" readonly="1" options="{'fold_field': 'fold'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+
+                            <h1>
+                                <field name="name" placeholder="Tên thiết bị"/>
+                            </h1>
+                            <div>
+                                <field name="image_1920" widget='image' class="oe_avatar"/>
+
+                         </div>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="device_main_id"/>
+                                <field name="amount"/>
+                                <field name="price"/>
+
+
+                            </group>
+                            <group>
+                                <field name="date_import"/>
+                                <field name="first_date_use"/>
+                                <field name="partner"/>
+                            </group>
+                        </group>
+                        <notebook>
+                        <page string="Mô tả" name="des">
+                            <field name="description"/>
+                        </page>
+
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="device_extra_tree_view" model="ir.ui.view">
+            <field name="name">device.extra.tree</field>
+            <field name="model">device.extra</field>
+            <field name="arch" type="xml">
+                <tree string="Thiết bị phụ tùnng">
+                   <field name="code"/>
+                   <field name="device_main_id"/>
+                   <field name="amount"/>
+                   <field name="price"/>
+                    <field name="date_import"/>
+                    <field name="first_date_use"/>
+                    <field name="partner"/>
+                </tree>
+            </field>
+        </record>
+        <record id="device_extra_act_window" model="ir.actions.act_window">
+            <field name="name">Thiết bị phụ tùng</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">device.extra</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+
+    </data>
+</odoo>
