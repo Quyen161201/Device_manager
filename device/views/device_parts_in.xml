@@ -2,11 +2,11 @@
 <odoo>
     <data>
 
-        <record id="device_extra_form_view" model="ir.ui.view">
-            <field name="name">device.extra.form</field>
-            <field name="model">device.extra</field>
+        <record id="device_parts_in_form_view" model="ir.ui.view">
+            <field name="name">device.parts.in.form</field>
+            <field name="model">device.parts.in</field>
             <field name="arch" type="xml">
-                <form string="Thiết bị phụ tùng">
+                <form string="Thêm linh kiện thiết bị">
                     <header>
                         <button type="object" name="open_using" string="Đang sử dụng"
                                 invisible="status in ['using','not_used']"
@@ -27,25 +27,27 @@
                             <h1>
                                 <field name="name" placeholder="Tên thiết bị"/>
                             </h1>
-                            <div>
-                                <field name="image_1920" widget='image' class="oe_avatar"/>
 
-                            </div>
+
                         </div>
+                        <div>
+                            <field name="image_1920" widget='image' class="oe_avatar"/>
+                        </div>
+
                         <group>
                             <group>
-                                <field name="code"/>
-                                <field name="device_main_id"/>
+                                <field name="code" placeholder="Mã thiết bị"/>
+                                <field name="main_device_id"/>
+                                <field name="extra_device_id"/>
                                 <field name="amount"/>
-                                <field name="price"/>
-
-
                             </group>
                             <group>
+                                <field name="price"/>
+                                <field name="partner"/>
                                 <field name="date_import"/>
                                 <field name="first_date_use"/>
-                                <field name="partner"/>
                             </group>
+
                         </group>
                         <notebook>
                             <page string="Mô tả" name="des">
@@ -54,7 +56,7 @@
                             </page>
                             <page name="des_img" string="Hình ảnh mô tả">
                                 <field name="description_images_ids" mode="kanban">
-                                    <kanban string="Main Device Images">
+                                    <kanban string="Parts In Device Images">
                                         <field name="name"/>
                                         <field name="description"/>
                                         <field name="image"/>
@@ -113,26 +115,72 @@
             </field>
         </record>
 
-        <record id="device_extra_tree_view" model="ir.ui.view">
-            <field name="name">device.extra.tree</field>
-            <field name="model">device.extra</field>
+        <record id="device_parts_in_tree_view" model="ir.ui.view">
+            <field name="name">device.parts.in.tree</field>
+            <field name="model">device.parts.in</field>
             <field name="arch" type="xml">
-                <tree string="Thiết bị phụ tùnng">
+                <tree string="List device parts in">
+                    <field name="name"/>
                     <field name="code"/>
-                    <field name="device_main_id"/>
+                    <field name="main_device_id"/>
+                    <field name="extra_device_id"/>
                     <field name="amount"/>
                     <field name="price"/>
+                    <field name="partner"/>
                     <field name="date_import"/>
                     <field name="first_date_use"/>
-                    <field name="partner"/>
+
                 </tree>
             </field>
         </record>
-        <record id="device_extra_act_window" model="ir.actions.act_window">
-            <field name="name">Thiết bị phụ tùng</field>
+
+        <record id="view_device_parts_in_kanban" model="ir.ui.view">
+            <field name="name">device.parts.in</field>
+            <field name="model">device.parts.in</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="image_1920"/>
+                    <field name="status"/>
+                    <field name="code"/>
+
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="o_kanban_image"
+                                     t-attf-style="background-image:url('#{kanban_image('device.parts.in','image_1920',record.id.raw_value,placeholder)}'); height:100%">
+                                </div>
+                                <div class="oe_kanban_details d-flex flex-column">
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                    <ul>
+                                        <li>
+                                            <field name="name"/>
+                                             <field name="code"/>
+                                        </li>
+                                        <li>
+                                            <field class="text-info" name="status"/>
+                                        </li>
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="device_parts_in_act_window" model="ir.actions.act_window">
+            <field name="name">Quản lý linh kiện thiết bị</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">device.extra</field>
-            <field name="view_mode">tree,form</field>
+            <field name="res_model">device.parts.in</field>
+            <field name="view_mode">kanban,tree,form</field>
+
 
         </record>
 

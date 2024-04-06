@@ -8,15 +8,18 @@
             <field name="arch" type="xml">
                 <form string="Thêm thiết bị">
                     <header>
-                        <button type="object" name="open_using"  string="Đang sử dụng"  invisible="status in ['using','not_used']"
-                         confirm="Bạn đã chắc chắn?"  class="btn btn-warning"/>
-                       <button type="object" name="open_liquidate"  string="Chờ thanh lý"  invisible="status in ['liquidate','not_used']"
-                         confirm="Bạn đã chắc chắn?"  class="btn btn-warning"/>
-                        <button type="object" name="open_is_broken"  string="Đang hỏng"  invisible="status in ['liquidate','is_broken']"
-                         confirm="Bạn đã chắc chắn?"  class="btn btn-warning"/>
-                        <button type="object" name="open_loss"  string="Bị mất"  invisible="status in ['loss','not_used']"
-                         confirm="Bạn đã chắc chắn?"  class="btn btn-warning"/>
-                         <field name="status" widget="statusbar" readonly="1" options="{'fold_field': 'fold'}"/>
+                        <button type="object" name="open_using" string="Đang sử dụng"
+                                invisible="status in ['using','not_used']"
+                                confirm="Bạn đã chắc chắn?" class="btn btn-warning"/>
+                        <button type="object" name="open_liquidate" string="Chờ thanh lý"
+                                invisible="status in ['liquidate','not_used']"
+                                confirm="Bạn đã chắc chắn?" class="btn btn-warning"/>
+                        <button type="object" name="open_is_broken" string="Đang hỏng"
+                                invisible="status in ['liquidate','is_broken']"
+                                confirm="Bạn đã chắc chắn?" class="btn btn-warning"/>
+                        <button type="object" name="open_loss" string="Bị mất" invisible="status in ['loss','not_used']"
+                                confirm="Bạn đã chắc chắn?" class="btn btn-warning"/>
+                        <field name="status" widget="statusbar" readonly="1" options="{'fold_field': 'fold'}"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -30,40 +33,92 @@
 
 
                         </div>
-                         <div>
-                                <field name="image_1920" widget='image' class="oe_avatar"/>
-                                <field name="qr_image" widget='image' class="oe_avatar" />
-                         </div>
+                        <div>
+                            <field name="image_1920" widget='image' class="oe_avatar"/>
+                            <field name="qr_image" widget='image' class="oe_avatar"/>
+                        </div>
 
                         <group>
                             <group>
                                 <field name="default_code"/>
                                 <field name="quantity"/>
                                 <field name="company_id"/>
-                                <field name="device_extra_ids" widget="many2many_tags" />
-
-
+                                <field name="device_extra_ids" widget="many2many_tags"/>
+                                <field name="company_id"/>
 
                             </group>
                             <group>
-                                <field name="company_id"/>
+
                                 <field name="department_id"/>
                                 <field name="employee_id"/>
                                 <field name="date_import"/>
+                                <field name="product_type"/>
+                                <field name="group_id"/>
 
                             </group>
 
                         </group>
                         <notebook>
-                        <page string="Mô tả" name="des">
-                            <field name="description"/>
+                            <page string="Mô tả" name="des">
+                                <field name="description"/>
 
-                        </page>
-                            <page string="Hình ảnh mô tả" name ="img_des">
-                                <field name="description_images_ids"/>
+                            </page>
+                            <page name="des_img" string="Hình ảnh mô tả">
+                                <field name="description_images_ids" mode="kanban">
+                                    <kanban string="Main Device Images">
+                                        <field name="name"/>
+                                        <field name="description"/>
+                                        <field name="image"/>
+                                        <templates>
+
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click">
+
+                                                    <a type="delete"
+                                                       class="btn btn-light fa fa-trash rounded-pill bg-inherit border-0 float-end"/>
+
+                                                    <div class="o_kanban_image">
+                                                        <field name="image" widget='image' class="oe_avatar"
+                                                               />
+                                                    </div>
+
+                                                    <div class="oe_kanban_details">
+                                                        <h3>
+                                                            <a type="open">
+                                                                <t t-if="record.name.raw_value">
+                                                                    <strong>
+                                                                        <t t-esc="record.name.raw_value"/>
+                                                                    </strong>
+                                                                </t>
+                                                            </a>
+                                                        </h3>
+                                                        <ul>
+                                                            <li t-if="record.description.raw_value">
+                                                                <strong>Mô tả:</strong>
+                                                                <t t-esc="record.description.raw_value"/>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                    <form>
+                                        <sheet>
+                                            <group col="4">
+                                                <field name="name" required="True"/>
+                                                <field name="description"/>
+                                            </group>
+                                            <hr/>
+                                            <div class="text-center">
+                                                <field name="image" widget="image" options="{'size': [400, 400]}"/>
+                                            </div>
+                                        </sheet>
+                                    </form>
+                                </field>
                             </page>
 
-                    </notebook>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
@@ -77,10 +132,10 @@
                     <field name="name"/>
 
                     <field name="default_code"/>
-                     <field name="quantity"/>
+                    <field name="quantity"/>
                     <field name="department_id"/>
                     <field name="employee_id"/>
-                    <field name="device_extra_ids" widget="many2many_tags" />
+                    <field name="device_extra_ids" widget="many2many_tags"/>
                     <field name="date_import"/>
                 </tree>
             </field>
@@ -96,7 +151,7 @@
                     <field name="image_1920"/>
 
                     <field name="default_code"/>
-                     <field name="status"/>
+                    <field name="status"/>
 
                     <templates>
                         <t t-name="kanban-box">
@@ -115,9 +170,9 @@
                                         <li>
                                             <field name="employee_id"/>
                                         </li>
-<!--                                        <li t-if="record.status.raw_value === 'out_off_stock'">-->
-<!--                                            <field class="text-danger" name="status"/>-->
-<!--                                        </li>-->
+                                        <!--                                        <li t-if="record.status.raw_value === 'out_off_stock'">-->
+                                        <!--                                            <field class="text-danger" name="status"/>-->
+                                        <!--                                        </li>-->
                                         <li>
                                             <field class="text-info" name="status"/>
                                         </li>
@@ -145,7 +200,8 @@
                     <field name="department_id"/>
 
                     <group expand="1" string="Group By">
-                       <filter string="Phòng ban" name="department" domain="[]" context="{'group_by':'department_id'}"/>
+                        <filter string="Phòng ban" name="department" domain="[]"
+                                context="{'group_by':'department_id'}"/>
                     </group>
                 </search>
             </field>
@@ -159,7 +215,6 @@
             <field name="context">{'search_default_department':1}</field>
 
         </record>
-
 
 
     </data>

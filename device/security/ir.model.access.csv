@@ -6,3 +6,9 @@ Access_device_main_admin,Access_device_main_admin,model_device_main,,1,1,1,1
 Access_device_extra_admin,Access_device_extra_admin,model_device_extra,,1,1,1,1
 
 Access_image_device_admin,Access_image_device_admin,model_device_image,,1,1,1,1
+
+Access_device_parts_in_admin,Access_device_parts_in_admin,model_device_parts_in,,1,1,1,1
+
+Access_device_group_admin,Access_device_group_admin,model_device_group,,1,1,1,1
+
+Access_device_product_admin,Access_device_product_admin,model_device_product,,1,1,1,1

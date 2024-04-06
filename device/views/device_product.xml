@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="device_product_form_view" model="ir.ui.view">
+            <field name="name">device.product.form</field>
+            <field name="model">device.product</field>
+            <field name="arch" type="xml">
+                <form string="Phân loại">
+                    <sheet>
+
+                            <group>
+                                <field name="name"/>
+                            </group>
+
+                        <notebook>
+                            <page string="Nhóm thiết bị" name="device_group">
+                               <field name="device_group_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="device_product_tree_view" model="ir.ui.view">
+            <field name="name">device.product.tree</field>
+            <field name="model">device.product</field>
+            <field name="arch" type="xml">
+                <tree string="Phân loại">
+                    <field name="name"/>
+
+                </tree>
+            </field>
+        </record>
+        <record id="device_product_act_window" model="ir.actions.act_window">
+            <field name="name">device.product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">device.product</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+
+    </data>
+</odoo>
