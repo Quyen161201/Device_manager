@@ -5,6 +5,7 @@
         <menuitem name="Thiết bị chính" id="device_menu" parent="root_menu_device"  action="device_main_act_window"/>
         <menuitem name="Thiết bị phụ tùng" id="device_extra_menu"  action="device_extra_act_window" parent="root_menu_device"/>
         <menuitem name="Linh kiện thiết bị" id="device_parts_in_menu"  action="device_parts_in_act_window" parent="root_menu_device"/>
+        <menuitem name="Phân loại" id="device_group_menu"  action="device_product_act_window" parent="root_menu_device"/>
 
 
 

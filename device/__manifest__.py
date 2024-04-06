@@ -14,6 +14,7 @@
         'views/device_main.xml',
         'views/device_extra.xml',
         'views/device_parts_in.xml',
+        'views/device_product.xml',
         'data/device_sequence.xml',
         'views/menu.xml'
     ],

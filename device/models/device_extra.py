@@ -21,7 +21,7 @@ class ModelName(models.Model):
     price = fields.Integer('Giá', default=0)
     partner = fields.Char('Nhà cung cấp')
     image_1920 = fields.Binary(default=_default_image, store=True)
-    device_parts_in_ids = fields.One2many('device.parts_in','extra_device_id','Linh kiện thiết bị')
+    device_parts_in_ids = fields.One2many('device.parts.in','extra_device_id','Linh kiện thiết bị')
 
     description_images_ids= fields.One2many('device.image','extra_device_id','Hình ảnh mô tả')
 

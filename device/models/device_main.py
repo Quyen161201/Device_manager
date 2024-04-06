@@ -41,10 +41,13 @@ class DeviceMain(models.Model):
     employee_id = fields.Many2one('hr.employee', 'Nhân viên sử dụng',
                                   domain=[('department_id', 'child_of', 'department_id')])
     device_extra_ids = fields.One2many('device.extra','device_main_id','Thiết bị phụ tùng')
-    device_parts_in_ids = fields.One2many('device.parts_in','main_device_id','Linh kiện thiết bị')
+    device_parts_in_ids = fields.One2many('device.parts.in','main_device_id','Linh kiện thiết bị')
     image_1920 = fields.Binary(default=_default_image, store=True)
     qr_image = fields.Binary('QR code', compute='_generate_qr')
     description_images_ids= fields.One2many('device.image','main_device_id','Hình ảnh mô tả')
+    group_id = fields.Many2one('device.group','Nhóm thiết bị', domain="[('device_product_id','=',product_type)]")
+    product_type = fields.Many2one('device.product', 'Phân loại')
+
 
     @api.model
     def create(self, vals_list):

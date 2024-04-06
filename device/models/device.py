@@ -23,7 +23,7 @@ class DeviceImage(models.Model):
     description = fields.Text('Mô tả')
     main_device_id = fields.Many2one('device.main')
     extra_device_id = fields.Many2one('device.extra')
-    parts_in_device_id = fields.Many2one('device.parts_in')
+    parts_in_device_id = fields.Many2one('device.parts.in')
 
 
 # class Attachment(models.Model):

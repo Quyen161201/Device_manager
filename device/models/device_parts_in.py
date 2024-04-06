@@ -5,7 +5,7 @@ from odoo.modules import get_module_resource
 
 
 class DevicePartsIn(models.Model):
-    _name = 'device.parts_in'
+    _name = 'device.parts.in'
     _inherit = 'device.device'
     _description = 'Linh kiện thiết bị'
 
