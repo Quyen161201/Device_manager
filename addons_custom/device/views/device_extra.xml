@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="device_extra_form_view" model="ir.ui.view">
+            <field name="name">device.extra.form</field>
+            <field name="model">device.extra</field>
+            <field name="arch" type="xml">
+                <form string="Thiết bị phụ tùng">
+                    <header>
+                        <button type="object" name="open_using" string="Đang sử dụng"
+                                invisible="status == 'using'"
+                                confirm="Bạn đã chắc chắn?" class="btn btn-warning"/>
+                        <button type="object" name="open_liquidate" string="Chờ thanh lý"
+                                invisible="status in ['liquidate','not_used']"
+                                confirm="Bạn đã chắc chắn?" class="btn btn-warning"/>
+                        <button type="object" name="open_is_broken" string="Đang hỏng"
+                                invisible="status in ['is_broken','not_used']"
+                                confirm="Bạn đã chắc chắn?" class="btn btn-warning"/>
+                        <button type="object" name="open_loss" string="Bị mất" invisible="status in ['loss','not_used']"
+                                confirm="Bạn đã chắc chắn?" class="btn btn-warning"/>
+                        <field name="status" widget="statusbar" readonly="1" options="{'fold_field': 'fold'}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Tên thiết bị"/>
+                            </h1>
+
+                        </div>
+                         <div>
+                                <field name="image_1920" widget='image' class="oe_avatar"/>
+                            </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="device_main_id"/>
+                                <field name="amount"/>
+                                <field name="price"/>
+
+
+                            </group>
+                            <group>
+                                <field name="date_import"/>
+                                <field name="first_date_use"/>
+                                <field name="partner"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Mô tả" name="des">
+                                <field name="description" widget="html"/>
+                            </page>
+                            <page name="des_img" string="Hình ảnh mô tả">
+                                <field name="description_images_ids" mode="kanban">
+                                    <kanban string="Main Device Images">
+                                        <field name="name"/>
+                                        <field name="description" />
+                                        <field name="image"/>
+                                        <templates>
+
+                                            <t t-name="kanban-box">
+                                                <div class="oe_kanban_global_click">
+
+                                                    <a type="delete"
+                                                       class="btn btn-light fa fa-trash rounded-pill bg-inherit border-0 float-end"/>
+
+                                                    <div class="o_kanban_image">
+                                                        <field name="image" widget='image' class="oe_avatar"
+                                                        />
+                                                    </div>
+
+                                                    <div class="oe_kanban_details">
+                                                        <h3>
+                                                            <a type="open">
+                                                                <t t-if="record.name.raw_value">
+                                                                    <strong>
+                                                                        <t t-esc="record.name.raw_value"/>
+                                                                    </strong>
+                                                                </t>
+                                                            </a>
+                                                        </h3>
+                                                        <ul>
+                                                            <li t-if="record.description.raw_value">
+                                                                <strong>Mô tả:</strong>
+                                                                <t t-esc="record.description.raw_value"/>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </templates>
+                                    </kanban>
+                                    <form>
+                                        <sheet>
+                                            <group col="4">
+                                                <field name="name" required="True"/>
+                                                <field name="description"/>
+                                            </group>
+                                            <hr/>
+                                            <div class="text-center">
+                                                <field name="image" widget="image" options="{'size': [400, 400]}"/>
+                                            </div>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="device_extra_tree_view" model="ir.ui.view">
+            <field name="name">device.extra.tree</field>
+            <field name="model">device.extra</field>
+            <field name="arch" type="xml">
+                <tree string="Thiết bị phụ tùnng">
+                    <field name="code"/>
+                    <field name="device_main_id"/>
+                    <field name="amount"/>
+                    <field name="price"/>
+                    <field name="date_import"/>
+                    <field name="first_date_use"/>
+                    <field name="partner"/>
+                </tree>
+            </field>
+        </record>
+        <record id="device_extra_act_window" model="ir.actions.act_window">
+            <field name="name">Thiết bị phụ tùng</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">device.extra</field>
+            <field name="view_mode">tree,form</field>
+
+        </record>
+
+
+    </data>
+</odoo>
